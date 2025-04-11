@@ -10,10 +10,16 @@ def compare_agents(args):
     """
     Train and compare DQN and Double DQN on the same environment
     """
-    # Check for GPU availability
+    # Check for GPU availability but be concise about it
     import torch
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"\nComparing agents on device: {device}")
+    
+    # Only print detailed GPU info in verbose mode
+    if device.type == 'cuda' and args.verbose:
+        gpu_props = torch.cuda.get_device_properties(0)
+        print(f"GPU: {gpu_props.name}")
+        print(f"Memory: {gpu_props.total_memory / 1024**2:.0f} MB")
     
     # Initialize lists to store metrics for multiple seeds
     all_dqn_metrics = []
@@ -49,6 +55,10 @@ def compare_agents(args):
         import torch
         np.random.seed(current_seed)
         torch.manual_seed(current_seed)
+        
+        # Pass quiet/verbose flags to train function
+        seed_args.quiet = args.quiet
+        seed_args.verbose = args.verbose
         
         # Train DQN
         print("\n" + "="*50)
@@ -218,6 +228,10 @@ if __name__ == "__main__":
                         help='Generate paper-style plots using multiple seeds')
     parser.add_argument('--force', action='store_true', 
                         help='Force continuation without confirmation')
+    parser.add_argument('--quiet', action='store_true', 
+                        help='Suppress non-essential output')
+    parser.add_argument('--verbose', action='store_true', 
+                        help='Enable verbose output')
     
     args = parser.parse_args()
     

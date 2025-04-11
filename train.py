@@ -17,16 +17,18 @@ def train(args):
     """
     Train DQN or Double DQN agent based on episodes instead of frames
     """
-    # First check for CUDA availability
+    # First check for CUDA availability but reduce verbosity
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Training on device: {device}")
     
-    # For Colab/Kaggle, display more detailed GPU info if available
-    if device.type == 'cuda':
+    # Only print GPU info once at the beginning, and make it concise
+    if device.type == 'cuda' and not args.quiet:
         gpu_props = torch.cuda.get_device_properties(0)
         print(f"GPU: {gpu_props.name}")
-        print(f"GPU Memory: {gpu_props.total_memory / 1024**2:.0f} MB")
-        print(f"CUDA Capability: {gpu_props.major}.{gpu_props.minor}")
+        # Skip additional GPU details unless verbose mode is enabled
+        if args.verbose:
+            print(f"GPU Memory: {gpu_props.total_memory / 1024**2:.0f} MB")
+            print(f"CUDA Capability: {gpu_props.major}.{gpu_props.minor}")
     
     # Create environment
     env = None
@@ -80,8 +82,8 @@ def train(args):
     print(f"Action space: {env.action_space}")
     print(f"Using {'image-based' if is_atari else 'vector-based'} network architecture")
     
-    # Create agent
-    if args.agent_type == 'dqn':
+    # Create agent with reduced verbosity in CUDA mode
+    if args.agent_type.lower() == 'dqn':
         agent = DQNAgent(
             input_shape=input_shape,
             n_actions=n_actions,
@@ -92,12 +94,13 @@ def train(args):
             eps_end=args.eps_end,
             eps_decay=args.eps_decay,
             target_update=args.target_update,
-            learning_rate=args.lr
+            learning_rate=args.lr,
+            verbose=(args.verbose and not args.quiet)  # Only be verbose if explicitly requested
         )
-    else:
+    elif args.agent_type.lower() == 'ddqn':
         agent = DoubleDQNAgent(
             input_shape=input_shape,
-            n_actions=n_actions,
+            n_actions=n_actions, 
             buffer_size=args.buffer_size,
             batch_size=args.batch_size,
             gamma=args.gamma,
@@ -105,7 +108,8 @@ def train(args):
             eps_end=args.eps_end,
             eps_decay=args.eps_decay,
             target_update=args.target_update,
-            learning_rate=args.lr
+            learning_rate=args.lr,
+            verbose=(args.verbose and not args.quiet)
         )
     
     # Initialize metrics tracker
@@ -319,6 +323,10 @@ if __name__ == '__main__':
                         help='Render the environment during final evaluation')
     parser.add_argument('--seed', type=int, default=42, 
                         help='Random seed')
+    parser.add_argument('--quiet', action='store_true', 
+                        help='Reduce verbosity')
+    parser.add_argument('--verbose', action='store_true', 
+                        help='Increase verbosity')
     
     args = parser.parse_args()
     

@@ -9,9 +9,9 @@ try:
 except ImportError:
     USING_GYMNASIUM = False
 
-def evaluate_agent(env, agent, num_episodes=10, render=False):
+def evaluate_agent(env, agent, num_episodes=10, render=False, quiet=False):
     """
-    Evaluate an agent on a given environment
+    Evaluate agent's performance on the environment
     """
     episode_rewards = []
     episode_lengths = []
@@ -53,11 +53,22 @@ def evaluate_agent(env, agent, num_episodes=10, render=False):
         episode_lengths.append(episode_length)
         q_values.append(np.mean(episode_q_vals))
     
+    mean_reward = np.mean(episode_rewards)
+    mean_length = np.mean(episode_lengths)
+    mean_q = np.mean(q_values)
+    
+    # Only print if not in quiet mode
+    if not quiet:
+        print(f"Evaluation over {num_episodes} episodes:")
+        print(f"  Mean reward: {mean_reward:.2f}")
+        print(f"  Mean length: {mean_length:.2f}")
+        print(f"  Mean Q-value: {mean_q:.4f}")
+    
     return {
-        'mean_reward': np.mean(episode_rewards),
-        'std_reward': np.std(episode_rewards),
-        'mean_length': np.mean(episode_lengths),
-        'mean_q_value': np.mean(q_values)
+        'mean_reward': mean_reward,
+        'mean_length': mean_length,
+        'mean_q_value': mean_q,
+        'rewards': episode_rewards
     }
 
 def compute_actual_values(env, agent, gamma=0.99, num_episodes=10):

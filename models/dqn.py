@@ -76,15 +76,18 @@ class DQNAgent:
                 eps_end=0.1,
                 eps_decay=1000000,
                 target_update=10000,
-                learning_rate=0.00025):
+                learning_rate=0.00025,
+                verbose=True):
         
-        # Check if CUDA is available and print device information
+        # Check if CUDA is available but only print if verbose is enabled
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        print(f"Using device: {self.device}")
-        if self.device.type == 'cuda':
-            print(f"GPU: {torch.cuda.get_device_name(0)}")
-            print(f"Memory allocated: {torch.cuda.memory_allocated(0) / 1024**2:.2f} MB")
-            print(f"Memory cached: {torch.cuda.memory_reserved(0) / 1024**2:.2f} MB")
+        self.verbose = verbose
+        
+        if self.verbose:
+            print(f"Using device: {self.device}")
+            # Only print detailed GPU info once during initialization, not every call
+            if self.device.type == 'cuda':
+                print(f"GPU: {torch.cuda.get_device_name(0)}")
         
         self.policy_net = DQNNetwork(input_shape, n_actions).to(self.device)
         self.target_net = DQNNetwork(input_shape, n_actions).to(self.device)

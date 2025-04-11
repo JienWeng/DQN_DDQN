@@ -45,6 +45,10 @@ def main():
                               help='Force execution without confirmation prompts')
     train_parser.add_argument('--no_cuda', action='store_true',
                               help='Disable CUDA even if available')
+    train_parser.add_argument('--verbose', action='store_true',
+                              help='Enable verbose output')
+    train_parser.add_argument('--quiet', action='store_true',
+                              help='Reduce output to minimum')
     
     # Compare parser
     compare_parser = subparsers.add_parser('compare', help='Compare DQN and Double DQN')
@@ -86,6 +90,10 @@ def main():
                                 help='Force execution without confirmation prompts')
     compare_parser.add_argument('--no_cuda', action='store_true',
                                 help='Disable CUDA even if available')
+    compare_parser.add_argument('--verbose', action='store_true',
+                                help='Enable verbose output')
+    compare_parser.add_argument('--quiet', action='store_true',
+                                help='Reduce output to minimum')
     
     # Parse arguments
     args = parser.parse_args()
