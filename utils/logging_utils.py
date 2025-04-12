@@ -66,7 +66,24 @@ class ExperimentLogger:
                 self.logger.info(f"  {key}: {value}")
                 
     def save_metrics(self):
-        """Save metrics to file"""
+        """Save metrics to file with proper JSON serialization"""
         metrics_file = f"{self.log_dir}/{self.experiment_name}_{self.timestamp}_metrics.json"
+        
+        # Convert numpy types to native Python types
+        def convert_to_serializable(obj):
+            if isinstance(obj, np.integer):
+                return int(obj)
+            elif isinstance(obj, np.floating):
+                return float(obj)
+            elif isinstance(obj, np.ndarray):
+                return obj.tolist()
+            elif isinstance(obj, list):
+                return [convert_to_serializable(item) for item in obj]
+            elif isinstance(obj, dict):
+                return {key: convert_to_serializable(value) for key, value in obj.items()}
+            return obj
+        
+        serializable_metrics = convert_to_serializable(self.metrics)
+        
         with open(metrics_file, 'w') as f:
-            json.dump(self.metrics, f, indent=4)
+            json.dump(serializable_metrics, f, indent=4)

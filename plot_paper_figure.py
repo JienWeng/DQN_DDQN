@@ -17,15 +17,7 @@ def smooth_data(data, window_size=5):
     return np.convolve(data, kernel, mode='valid')
 
 def generate_paper_figure(dqn_metrics_list, ddqn_metrics_list, env_name, save_path=None):
-    """
-    Generate a figure similar to those in the Double DQN paper
-    
-    Args:
-        dqn_metrics_list: List of MetricTracker objects for DQN
-        ddqn_metrics_list: List of MetricTracker objects for Double DQN
-        env_name: Environment name
-        save_path: Path to save the figure
-    """
+    """Generate paper figure without displaying"""
     # Set the style for academic paper
     plt.rcParams.update({
         'font.family': 'serif',
@@ -195,13 +187,12 @@ def generate_paper_figure(dqn_metrics_list, ddqn_metrics_list, env_name, save_pa
     
     plt.tight_layout()
     
-    # Save figure if path is provided
+    # Save figure and close without displaying
     if save_path:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
+    plt.close()  # Close figure without displaying
     
-    plt.show()
-    
-    # Print statistics
+    # Print statistics without plots
     print("\nValue Estimation Statistics:")
     print(f"  DQN mean estimated: {np.mean(dqn_median):.2f}")
     print(f"  DQN mean actual: {dqn_actual_mean:.2f}")

@@ -127,13 +127,12 @@ def compare_agents(args):
     
     # Plot comparative metrics
     if args.plot_paper_style and args.seeds > 1:
-        # Generate paper-style plots using multiple seeds
+        # Generate paper-style plots using multiple seeds (without display)
         from plot_paper_figure import generate_paper_figure
         generate_paper_figure(all_dqn_metrics, all_ddqn_metrics, args.env_name, 
                             f'results/paper_style_{args.env_name}.png')
     else:
-        # Generate basic comparison plots from the last run
-        # Plot rewards
+        # Save basic comparison plots without display
         plt.figure(figsize=(10, 6))
         plt.plot(dqn_metrics.episode_rewards, color='#FF7F0E', label='DQN', alpha=0.8)
         plt.plot(ddqn_metrics.episode_rewards, color='#1F77B4', label='Double DQN', alpha=0.8)
@@ -144,7 +143,7 @@ def compare_agents(args):
         plt.grid(True, linestyle='--', alpha=0.7)
         plt.tight_layout()
         plt.savefig(f'results/rewards_{args.env_name}.png', dpi=300, bbox_inches='tight')
-        plt.show()
+        plt.close()  # Close without display
         
         # Plot value estimates and overestimation
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
@@ -182,7 +181,7 @@ def compare_agents(args):
         
         plt.tight_layout()
         plt.savefig(f'results/value_comparison_{args.env_name}.png', dpi=300, bbox_inches='tight')
-        plt.show()
+        plt.close()  # Close without display
     
     # Compute summary statistics
     dqn_final_reward = np.mean(dqn_metrics.episode_rewards[-100:])

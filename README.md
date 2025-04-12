@@ -50,7 +50,7 @@ python main.py compare --env_name Breakout-v0 --total_episodes 2000
 python main.py compare --env_name CartPole-v1 --total_episodes 500 --seeds 5 --plot_paper_style
 
 # Run for CartPole (n_runs = 10)
-python main.py compare --env_name CartPole-v1 --total_episodes 1000 --seeds 30 --plot_paper_style
+python main.py compare --env_name CartPole-v1 --total_episodes 2000 --seeds 10 --plot_paper_style --force
 ```
 
 
