@@ -1,0 +1,231 @@
+2025-04-12 13:18:24,034 - dqn_CartPole-v1 - INFO - Hyperparameters:
+2025-04-12 13:18:24,035 - dqn_CartPole-v1 - INFO -   command: compare
+2025-04-12 13:18:24,035 - dqn_CartPole-v1 - INFO -   env_name: CartPole-v1
+2025-04-12 13:18:24,035 - dqn_CartPole-v1 - INFO -   total_episodes: 500
+2025-04-12 13:18:24,035 - dqn_CartPole-v1 - INFO -   max_frames_per_episode: 10000
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   buffer_size: 100000
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   batch_size: 32
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   gamma: 0.99
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   eps_start: 1.0
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   eps_end: 0.1
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   eps_decay: 500
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   target_update: 10
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   lr: 0.00025
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   eval_frequency: 50
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   eval_episodes: 10
+2025-04-12 13:18:24,036 - dqn_CartPole-v1 - INFO -   render: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   seeds: 5
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   plot_paper_style: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   seed: 42
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   force: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   no_cuda: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   verbose: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   quiet: False
+2025-04-12 13:18:24,038 - dqn_CartPole-v1 - INFO -   agent_type: dqn
+2025-04-12 13:18:24,847 - dqn_CartPole-v1 - INFO - Model output shape: torch.Size([2])
+2025-04-12 13:18:24,848 - dqn_CartPole-v1 - INFO - Output range: [-0.0131, 0.0219]
+2025-04-12 13:18:24,868 - dqn_CartPole-v1 - INFO - Step 1 - episode_reward: 12.0
+2025-04-12 13:18:24,868 - dqn_CartPole-v1 - INFO - Step 1 - episode_length: 12
+2025-04-12 13:18:24,868 - dqn_CartPole-v1 - INFO - Step 1 - average_loss: 0
+2025-04-12 13:18:24,868 - dqn_CartPole-v1 - INFO - Step 1 - average_q_value: 0.008194541558623314
+2025-04-12 13:18:24,949 - dqn_CartPole-v1 - INFO - Step 2 - episode_reward: 36.0
+2025-04-12 13:18:24,949 - dqn_CartPole-v1 - INFO - Step 2 - episode_length: 36
+2025-04-12 13:18:24,949 - dqn_CartPole-v1 - INFO - Step 2 - average_loss: 0.4227116370902342
+2025-04-12 13:18:24,949 - dqn_CartPole-v1 - INFO - Step 2 - average_q_value: 0.05494655668735504
+2025-04-12 13:18:24,989 - dqn_CartPole-v1 - INFO - Step 3 - episode_reward: 40.0
+2025-04-12 13:18:24,989 - dqn_CartPole-v1 - INFO - Step 3 - episode_length: 40
+2025-04-12 13:18:24,989 - dqn_CartPole-v1 - INFO - Step 3 - average_loss: 0.18899176977574825
+2025-04-12 13:18:24,989 - dqn_CartPole-v1 - INFO - Step 3 - average_q_value: 0.47364291548728943
+2025-04-12 13:18:25,022 - dqn_CartPole-v1 - INFO - Step 4 - episode_reward: 29.0
+2025-04-12 13:18:25,022 - dqn_CartPole-v1 - INFO - Step 4 - episode_length: 29
+2025-04-12 13:18:25,022 - dqn_CartPole-v1 - INFO - Step 4 - average_loss: 0.02800108569449392
+2025-04-12 13:18:25,022 - dqn_CartPole-v1 - INFO - Step 4 - average_q_value: 0.9437031149864197
+2025-04-12 13:18:25,079 - dqn_CartPole-v1 - INFO - Step 5 - episode_reward: 51.0
+2025-04-12 13:18:25,079 - dqn_CartPole-v1 - INFO - Step 5 - episode_length: 51
+2025-04-12 13:18:25,079 - dqn_CartPole-v1 - INFO - Step 5 - average_loss: 0.006451336591614082
+2025-04-12 13:18:25,079 - dqn_CartPole-v1 - INFO - Step 5 - average_q_value: 1.016860008239746
+2025-04-12 13:18:25,113 - dqn_CartPole-v1 - INFO - Step 6 - episode_reward: 34.0
+2025-04-12 13:18:25,113 - dqn_CartPole-v1 - INFO - Step 6 - episode_length: 34
+2025-04-12 13:18:25,113 - dqn_CartPole-v1 - INFO - Step 6 - average_loss: 0.0017866315457093366
+2025-04-12 13:18:25,113 - dqn_CartPole-v1 - INFO - Step 6 - average_q_value: 1.0351759195327759
+2025-04-12 13:18:25,125 - dqn_CartPole-v1 - INFO - Step 7 - episode_reward: 12.0
+2025-04-12 13:18:25,125 - dqn_CartPole-v1 - INFO - Step 7 - episode_length: 12
+2025-04-12 13:18:25,125 - dqn_CartPole-v1 - INFO - Step 7 - average_loss: 0.002045109858348345
+2025-04-12 13:18:25,125 - dqn_CartPole-v1 - INFO - Step 7 - average_q_value: 1.2240431308746338
+2025-04-12 13:18:25,217 - dqn_CartPole-v1 - INFO - Step 8 - episode_reward: 44.0
+2025-04-12 13:18:25,217 - dqn_CartPole-v1 - INFO - Step 8 - episode_length: 44
+2025-04-12 13:18:25,217 - dqn_CartPole-v1 - INFO - Step 8 - average_loss: 0.002155338793686083
+2025-04-12 13:18:25,217 - dqn_CartPole-v1 - INFO - Step 8 - average_q_value: 1.0310724973678589
+2025-04-12 13:18:25,258 - dqn_CartPole-v1 - INFO - Step 9 - episode_reward: 18.0
+2025-04-12 13:18:25,258 - dqn_CartPole-v1 - INFO - Step 9 - episode_length: 18
+2025-04-12 13:18:25,258 - dqn_CartPole-v1 - INFO - Step 9 - average_loss: 0.000461370643784499
+2025-04-12 13:18:25,258 - dqn_CartPole-v1 - INFO - Step 9 - average_q_value: 1.0237764120101929
+2025-04-12 13:18:25,259 - dqn_CartPole-v1 - INFO - Resource Usage - CPU: 0.0%, Memory: 0.28GB
+2025-04-12 13:18:25,297 - dqn_CartPole-v1 - INFO - Step 10 - episode_reward: 19.0
+2025-04-12 13:18:25,297 - dqn_CartPole-v1 - INFO - Step 10 - episode_length: 19
+2025-04-12 13:18:25,297 - dqn_CartPole-v1 - INFO - Step 10 - average_loss: 0.00020796079173267476
+2025-04-12 13:18:25,298 - dqn_CartPole-v1 - INFO - Step 10 - average_q_value: 1.0228525400161743
+2025-04-12 13:18:25,320 - dqn_CartPole-v1 - INFO - Step 11 - episode_reward: 12.0
+2025-04-12 13:18:25,320 - dqn_CartPole-v1 - INFO - Step 11 - episode_length: 12
+2025-04-12 13:18:25,320 - dqn_CartPole-v1 - INFO - Step 11 - average_loss: 0.3286450368662675
+2025-04-12 13:18:25,320 - dqn_CartPole-v1 - INFO - Step 11 - average_q_value: 1.3888787031173706
+2025-04-12 13:18:25,331 - dqn_CartPole-v1 - INFO - Step 12 - episode_reward: 9.0
+2025-04-12 13:18:25,331 - dqn_CartPole-v1 - INFO - Step 12 - episode_length: 9
+2025-04-12 13:18:25,331 - dqn_CartPole-v1 - INFO - Step 12 - average_loss: 0.06850420807798703
+2025-04-12 13:18:25,331 - dqn_CartPole-v1 - INFO - Step 12 - average_q_value: 2.0000953674316406
+2025-04-12 13:18:25,361 - dqn_CartPole-v1 - INFO - Step 13 - episode_reward: 33.0
+2025-04-12 13:18:25,361 - dqn_CartPole-v1 - INFO - Step 13 - episode_length: 33
+2025-04-12 13:18:25,362 - dqn_CartPole-v1 - INFO - Step 13 - average_loss: 0.0331711001538982
+2025-04-12 13:18:25,362 - dqn_CartPole-v1 - INFO - Step 13 - average_q_value: 1.9678256511688232
+2025-04-12 13:18:25,371 - dqn_CartPole-v1 - INFO - Step 14 - episode_reward: 11.0
+2025-04-12 13:18:25,372 - dqn_CartPole-v1 - INFO - Step 14 - episode_length: 11
+2025-04-12 13:18:25,372 - dqn_CartPole-v1 - INFO - Step 14 - average_loss: 0.020664008249613373
+2025-04-12 13:18:25,372 - dqn_CartPole-v1 - INFO - Step 14 - average_q_value: 2.097930669784546
+2025-04-12 13:18:25,384 - dqn_CartPole-v1 - INFO - Step 15 - episode_reward: 14.0
+2025-04-12 13:18:25,384 - dqn_CartPole-v1 - INFO - Step 15 - episode_length: 14
+2025-04-12 13:18:25,384 - dqn_CartPole-v1 - INFO - Step 15 - average_loss: 0.019529211825491593
+2025-04-12 13:18:25,384 - dqn_CartPole-v1 - INFO - Step 15 - average_q_value: 2.0327248573303223
+2025-04-12 13:18:25,396 - dqn_CartPole-v1 - INFO - Step 16 - episode_reward: 14.0
+2025-04-12 13:18:25,396 - dqn_CartPole-v1 - INFO - Step 16 - episode_length: 14
+2025-04-12 13:18:25,396 - dqn_CartPole-v1 - INFO - Step 16 - average_loss: 0.02017316741070577
+2025-04-12 13:18:25,396 - dqn_CartPole-v1 - INFO - Step 16 - average_q_value: 1.9133065938949585
+2025-04-12 13:18:25,407 - dqn_CartPole-v1 - INFO - Step 17 - episode_reward: 14.0
+2025-04-12 13:18:25,407 - dqn_CartPole-v1 - INFO - Step 17 - episode_length: 14
+2025-04-12 13:18:25,407 - dqn_CartPole-v1 - INFO - Step 17 - average_loss: 0.0201936136997704
+2025-04-12 13:18:25,407 - dqn_CartPole-v1 - INFO - Step 17 - average_q_value: 1.9263967275619507
+2025-04-12 13:18:25,416 - dqn_CartPole-v1 - INFO - Step 18 - episode_reward: 9.0
+2025-04-12 13:18:25,416 - dqn_CartPole-v1 - INFO - Step 18 - episode_length: 9
+2025-04-12 13:18:25,416 - dqn_CartPole-v1 - INFO - Step 18 - average_loss: 0.01689486966157953
+2025-04-12 13:18:25,416 - dqn_CartPole-v1 - INFO - Step 18 - average_q_value: 1.8526456356048584
+2025-04-12 13:18:25,426 - dqn_CartPole-v1 - INFO - Step 19 - episode_reward: 13.0
+2025-04-12 13:18:25,426 - dqn_CartPole-v1 - INFO - Step 19 - episode_length: 13
+2025-04-12 13:18:25,426 - dqn_CartPole-v1 - INFO - Step 19 - average_loss: 0.019432182387950327
+2025-04-12 13:18:25,426 - dqn_CartPole-v1 - INFO - Step 19 - average_q_value: 1.931938648223877
+2025-04-12 13:18:25,427 - dqn_CartPole-v1 - INFO - Resource Usage - CPU: 301.3%, Memory: 0.28GB
+2025-04-12 13:18:25,438 - dqn_CartPole-v1 - INFO - Step 20 - episode_reward: 12.0
+2025-04-12 13:18:25,438 - dqn_CartPole-v1 - INFO - Step 20 - episode_length: 12
+2025-04-12 13:18:25,438 - dqn_CartPole-v1 - INFO - Step 20 - average_loss: 0.011841453282007327
+2025-04-12 13:18:25,438 - dqn_CartPole-v1 - INFO - Step 20 - average_q_value: 1.9435421228408813
+2025-04-12 13:18:25,450 - dqn_CartPole-v1 - INFO - Step 21 - episode_reward: 12.0
+2025-04-12 13:18:25,450 - dqn_CartPole-v1 - INFO - Step 21 - episode_length: 12
+2025-04-12 13:18:25,450 - dqn_CartPole-v1 - INFO - Step 21 - average_loss: 0.3013731613755226
+2025-04-12 13:18:25,450 - dqn_CartPole-v1 - INFO - Step 21 - average_q_value: 2.32472562789917
+2025-04-12 13:18:25,461 - dqn_CartPole-v1 - INFO - Step 22 - episode_reward: 13.0
+2025-04-12 13:18:25,461 - dqn_CartPole-v1 - INFO - Step 22 - episode_length: 13
+2025-04-12 13:18:25,461 - dqn_CartPole-v1 - INFO - Step 22 - average_loss: 0.07458913025374596
+2025-04-12 13:18:25,461 - dqn_CartPole-v1 - INFO - Step 22 - average_q_value: 3.0674121379852295
+2025-04-12 13:18:25,471 - dqn_CartPole-v1 - INFO - Step 23 - episode_reward: 13.0
+2025-04-12 13:18:25,471 - dqn_CartPole-v1 - INFO - Step 23 - episode_length: 13
+2025-04-12 13:18:25,471 - dqn_CartPole-v1 - INFO - Step 23 - average_loss: 0.07728239557204339
+2025-04-12 13:18:25,471 - dqn_CartPole-v1 - INFO - Step 23 - average_q_value: 3.071465015411377
+2025-04-12 13:18:25,494 - dqn_CartPole-v1 - INFO - Step 24 - episode_reward: 26.0
+2025-04-12 13:18:25,494 - dqn_CartPole-v1 - INFO - Step 24 - episode_length: 26
+2025-04-12 13:18:25,494 - dqn_CartPole-v1 - INFO - Step 24 - average_loss: 0.057707147350391515
+2025-04-12 13:18:25,494 - dqn_CartPole-v1 - INFO - Step 24 - average_q_value: 2.8335113525390625
+2025-04-12 13:18:25,512 - dqn_CartPole-v1 - INFO - Step 25 - episode_reward: 23.0
+2025-04-12 13:18:25,512 - dqn_CartPole-v1 - INFO - Step 25 - episode_length: 23
+2025-04-12 13:18:25,512 - dqn_CartPole-v1 - INFO - Step 25 - average_loss: 0.04911310296586674
+2025-04-12 13:18:25,512 - dqn_CartPole-v1 - INFO - Step 25 - average_q_value: 2.952239990234375
+2025-04-12 13:18:25,527 - dqn_CartPole-v1 - INFO - Step 26 - episode_reward: 19.0
+2025-04-12 13:18:25,527 - dqn_CartPole-v1 - INFO - Step 26 - episode_length: 19
+2025-04-12 13:18:25,527 - dqn_CartPole-v1 - INFO - Step 26 - average_loss: 0.05021597650882445
+2025-04-12 13:18:25,527 - dqn_CartPole-v1 - INFO - Step 26 - average_q_value: 2.728019952774048
+2025-04-12 13:18:25,537 - dqn_CartPole-v1 - INFO - Step 27 - episode_reward: 14.0
+2025-04-12 13:18:25,537 - dqn_CartPole-v1 - INFO - Step 27 - episode_length: 14
+2025-04-12 13:18:25,537 - dqn_CartPole-v1 - INFO - Step 27 - average_loss: 0.06007980335769909
+2025-04-12 13:18:25,537 - dqn_CartPole-v1 - INFO - Step 27 - average_q_value: 2.858354091644287
+2025-04-12 13:18:25,552 - dqn_CartPole-v1 - INFO - Step 28 - episode_reward: 19.0
+2025-04-12 13:18:25,552 - dqn_CartPole-v1 - INFO - Step 28 - episode_length: 19
+2025-04-12 13:18:25,552 - dqn_CartPole-v1 - INFO - Step 28 - average_loss: 0.04343766317163643
+2025-04-12 13:18:25,552 - dqn_CartPole-v1 - INFO - Step 28 - average_q_value: 3.0024852752685547
+2025-04-12 13:18:25,613 - dqn_CartPole-v1 - INFO - Step 29 - episode_reward: 78.0
+2025-04-12 13:18:25,613 - dqn_CartPole-v1 - INFO - Step 29 - episode_length: 78
+2025-04-12 13:18:25,613 - dqn_CartPole-v1 - INFO - Step 29 - average_loss: 0.046361394434755385
+2025-04-12 13:18:25,613 - dqn_CartPole-v1 - INFO - Step 29 - average_q_value: 2.9518063068389893
+2025-04-12 13:18:25,613 - dqn_CartPole-v1 - INFO - Resource Usage - CPU: 360.0%, Memory: 0.28GB
+2025-04-12 13:18:25,632 - dqn_CartPole-v1 - INFO - Step 30 - episode_reward: 24.0
+2025-04-12 13:18:25,632 - dqn_CartPole-v1 - INFO - Step 30 - episode_length: 24
+2025-04-12 13:18:25,632 - dqn_CartPole-v1 - INFO - Step 30 - average_loss: 0.03814442911728596
+2025-04-12 13:18:25,632 - dqn_CartPole-v1 - INFO - Step 30 - average_q_value: 2.9601891040802
+2025-04-12 13:18:25,662 - dqn_CartPole-v1 - INFO - Step 31 - episode_reward: 41.0
+2025-04-12 13:18:25,663 - dqn_CartPole-v1 - INFO - Step 31 - episode_length: 41
+2025-04-12 13:18:25,663 - dqn_CartPole-v1 - INFO - Step 31 - average_loss: 0.13891755765667413
+2025-04-12 13:18:25,663 - dqn_CartPole-v1 - INFO - Step 31 - average_q_value: 3.824185371398926
+2025-04-12 13:18:25,694 - dqn_CartPole-v1 - INFO - Step 32 - episode_reward: 43.0
+2025-04-12 13:18:25,694 - dqn_CartPole-v1 - INFO - Step 32 - episode_length: 43
+2025-04-12 13:18:25,694 - dqn_CartPole-v1 - INFO - Step 32 - average_loss: 0.0701806110459878
+2025-04-12 13:18:25,694 - dqn_CartPole-v1 - INFO - Step 32 - average_q_value: 3.9622671604156494
+2025-04-12 13:18:25,715 - dqn_CartPole-v1 - INFO - Step 33 - episode_reward: 28.0
+2025-04-12 13:18:25,715 - dqn_CartPole-v1 - INFO - Step 33 - episode_length: 28
+2025-04-12 13:18:25,715 - dqn_CartPole-v1 - INFO - Step 33 - average_loss: 0.07674785261873954
+2025-04-12 13:18:25,715 - dqn_CartPole-v1 - INFO - Step 33 - average_q_value: 3.9463837146759033
+2025-04-12 13:18:25,751 - dqn_CartPole-v1 - INFO - Step 34 - episode_reward: 49.0
+2025-04-12 13:18:25,751 - dqn_CartPole-v1 - INFO - Step 34 - episode_length: 49
+2025-04-12 13:18:25,751 - dqn_CartPole-v1 - INFO - Step 34 - average_loss: 0.06375930045864411
+2025-04-12 13:18:25,751 - dqn_CartPole-v1 - INFO - Step 34 - average_q_value: 3.986313819885254
+2025-04-12 13:18:25,933 - dqn_CartPole-v1 - INFO - Step 35 - episode_reward: 167.0
+2025-04-12 13:18:25,933 - dqn_CartPole-v1 - INFO - Step 35 - episode_length: 167
+2025-04-12 13:18:25,933 - dqn_CartPole-v1 - INFO - Step 35 - average_loss: 0.06007298973980109
+2025-04-12 13:18:25,933 - dqn_CartPole-v1 - INFO - Step 35 - average_q_value: 3.918778657913208
+2025-04-12 13:18:26,039 - dqn_CartPole-v1 - INFO - Step 36 - episode_reward: 140.0
+2025-04-12 13:18:26,039 - dqn_CartPole-v1 - INFO - Step 36 - episode_length: 140
+2025-04-12 13:18:26,039 - dqn_CartPole-v1 - INFO - Step 36 - average_loss: 0.04874138894956559
+2025-04-12 13:18:26,039 - dqn_CartPole-v1 - INFO - Step 36 - average_q_value: 3.9862775802612305
+2025-04-12 13:18:26,215 - dqn_CartPole-v1 - INFO - Step 37 - episode_reward: 225.0
+2025-04-12 13:18:26,215 - dqn_CartPole-v1 - INFO - Step 37 - episode_length: 225
+2025-04-12 13:18:26,215 - dqn_CartPole-v1 - INFO - Step 37 - average_loss: 0.044660057111436294
+2025-04-12 13:18:26,215 - dqn_CartPole-v1 - INFO - Step 37 - average_q_value: 4.135767459869385
+2025-04-12 13:18:26,369 - dqn_CartPole-v1 - INFO - Step 38 - episode_reward: 197.0
+2025-04-12 13:18:26,369 - dqn_CartPole-v1 - INFO - Step 38 - episode_length: 197
+2025-04-12 13:18:26,369 - dqn_CartPole-v1 - INFO - Step 38 - average_loss: 0.03952936026259434
+2025-04-12 13:18:26,369 - dqn_CartPole-v1 - INFO - Step 38 - average_q_value: 4.184114933013916
+2025-04-12 13:18:26,504 - dqn_CartPole-v1 - INFO - Step 39 - episode_reward: 173.0
+2025-04-12 13:18:26,504 - dqn_CartPole-v1 - INFO - Step 39 - episode_length: 173
+2025-04-12 13:18:26,504 - dqn_CartPole-v1 - INFO - Step 39 - average_loss: 0.03725172084085966
+2025-04-12 13:18:26,504 - dqn_CartPole-v1 - INFO - Step 39 - average_q_value: 4.2172369956970215
+2025-04-12 13:18:26,504 - dqn_CartPole-v1 - INFO - Resource Usage - CPU: 353.3%, Memory: 0.28GB
+2025-04-12 13:18:26,615 - dqn_CartPole-v1 - INFO - Step 40 - episode_reward: 147.0
+2025-04-12 13:18:26,615 - dqn_CartPole-v1 - INFO - Step 40 - episode_length: 147
+2025-04-12 13:18:26,615 - dqn_CartPole-v1 - INFO - Step 40 - average_loss: 0.03255320672693403
+2025-04-12 13:18:26,615 - dqn_CartPole-v1 - INFO - Step 40 - average_q_value: 4.195206165313721
+2025-04-12 13:18:26,710 - dqn_CartPole-v1 - INFO - Step 41 - episode_reward: 127.0
+2025-04-12 13:18:26,710 - dqn_CartPole-v1 - INFO - Step 41 - episode_length: 127
+2025-04-12 13:18:26,710 - dqn_CartPole-v1 - INFO - Step 41 - average_loss: 0.058475288941055595
+2025-04-12 13:18:26,710 - dqn_CartPole-v1 - INFO - Step 41 - average_q_value: 5.12809419631958
+2025-04-12 13:18:26,823 - dqn_CartPole-v1 - INFO - Step 42 - episode_reward: 148.0
+2025-04-12 13:18:26,823 - dqn_CartPole-v1 - INFO - Step 42 - episode_length: 148
+2025-04-12 13:18:26,823 - dqn_CartPole-v1 - INFO - Step 42 - average_loss: 0.03935600366644763
+2025-04-12 13:18:26,823 - dqn_CartPole-v1 - INFO - Step 42 - average_q_value: 5.157801628112793
+2025-04-12 13:18:26,959 - dqn_CartPole-v1 - INFO - Step 43 - episode_reward: 176.0
+2025-04-12 13:18:26,959 - dqn_CartPole-v1 - INFO - Step 43 - episode_length: 176
+2025-04-12 13:18:26,959 - dqn_CartPole-v1 - INFO - Step 43 - average_loss: 0.04159639592828832
+2025-04-12 13:18:26,959 - dqn_CartPole-v1 - INFO - Step 43 - average_q_value: 5.1506547927856445
+2025-04-12 13:18:27,077 - dqn_CartPole-v1 - INFO - Step 44 - episode_reward: 150.0
+2025-04-12 13:18:27,077 - dqn_CartPole-v1 - INFO - Step 44 - episode_length: 150
+2025-04-12 13:18:27,077 - dqn_CartPole-v1 - INFO - Step 44 - average_loss: 0.036815561929252
+2025-04-12 13:18:27,077 - dqn_CartPole-v1 - INFO - Step 44 - average_q_value: 5.194865703582764
+2025-04-12 13:18:27,241 - dqn_CartPole-v1 - INFO - Step 45 - episode_reward: 207.0
+2025-04-12 13:18:27,242 - dqn_CartPole-v1 - INFO - Step 45 - episode_length: 207
+2025-04-12 13:18:27,242 - dqn_CartPole-v1 - INFO - Step 45 - average_loss: 0.032820040747019406
+2025-04-12 13:18:27,242 - dqn_CartPole-v1 - INFO - Step 45 - average_q_value: 5.134707450866699
+2025-04-12 13:18:27,372 - dqn_CartPole-v1 - INFO - Step 46 - episode_reward: 168.0
+2025-04-12 13:18:27,372 - dqn_CartPole-v1 - INFO - Step 46 - episode_length: 168
+2025-04-12 13:18:27,372 - dqn_CartPole-v1 - INFO - Step 46 - average_loss: 0.032422109269343004
+2025-04-12 13:18:27,372 - dqn_CartPole-v1 - INFO - Step 46 - average_q_value: 5.150542259216309
+2025-04-12 13:18:27,554 - dqn_CartPole-v1 - INFO - Step 47 - episode_reward: 167.0
+2025-04-12 13:18:27,554 - dqn_CartPole-v1 - INFO - Step 47 - episode_length: 167
+2025-04-12 13:18:27,554 - dqn_CartPole-v1 - INFO - Step 47 - average_loss: 0.031832142928573386
+2025-04-12 13:18:27,554 - dqn_CartPole-v1 - INFO - Step 47 - average_q_value: 5.161684036254883
+2025-04-12 13:18:27,676 - dqn_CartPole-v1 - INFO - Step 48 - episode_reward: 150.0
+2025-04-12 13:18:27,676 - dqn_CartPole-v1 - INFO - Step 48 - episode_length: 150
+2025-04-12 13:18:27,676 - dqn_CartPole-v1 - INFO - Step 48 - average_loss: 0.03318245957799566
+2025-04-12 13:18:27,676 - dqn_CartPole-v1 - INFO - Step 48 - average_q_value: 5.16513729095459
+2025-04-12 13:18:27,827 - dqn_CartPole-v1 - INFO - Step 49 - episode_reward: 194.0
+2025-04-12 13:18:27,827 - dqn_CartPole-v1 - INFO - Step 49 - episode_length: 194
+2025-04-12 13:18:27,827 - dqn_CartPole-v1 - INFO - Step 49 - average_loss: 0.03917633450050603
+2025-04-12 13:18:27,827 - dqn_CartPole-v1 - INFO - Step 49 - average_q_value: 5.1369476318359375
+2025-04-12 13:18:27,828 - dqn_CartPole-v1 - INFO - Resource Usage - CPU: 360.3%, Memory: 0.28GB
+2025-04-12 13:18:27,965 - dqn_CartPole-v1 - INFO - Step 50 - episode_reward: 178.0
+2025-04-12 13:18:27,965 - dqn_CartPole-v1 - INFO - Step 50 - episode_length: 178
+2025-04-12 13:18:27,965 - dqn_CartPole-v1 - INFO - Step 50 - average_loss: 0.03359325412772674
+2025-04-12 13:18:27,965 - dqn_CartPole-v1 - INFO - Step 50 - average_q_value: 5.151516914367676

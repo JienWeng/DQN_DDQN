@@ -1,5 +1,6 @@
 import argparse
 import os
+# Fix imports to use absolute paths instead of relative
 from train import train
 from compare_agents import compare_agents
 

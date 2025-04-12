@@ -254,7 +254,7 @@ def train(args):
         logger.log_metrics(metrics_dict, episode)
         
         # Verify training progress
-        if not verify_training_progress(metrics, episode, min_reward_threshold=-100, logger):
+        if not verify_training_progress(metrics, episode, logger, min_reward_threshold=-100):
             if not args.force:
                 response = input("\nTraining may be stuck. Continue? [y/N]: ")
                 if response.lower() != 'y':

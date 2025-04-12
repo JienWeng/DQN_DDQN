@@ -16,7 +16,7 @@ def verify_model_outputs(model, sample_input, logger):
         logger.logger.error(f"Error in model verification: {e}")
         return False
 
-def verify_training_progress(metrics, episode, min_reward_threshold, logger):
+def verify_training_progress(metrics, episode, logger, min_reward_threshold=-100):
     """Verify if training is making progress"""
     if len(metrics.episode_rewards) < 100:
         return True
