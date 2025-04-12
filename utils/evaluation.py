@@ -13,6 +13,9 @@ def evaluate_agent(env, agent, num_episodes=10, render=False, quiet=False):
     """
     Evaluate agent's performance on the environment
     """
+    # Ensure agent is in eval mode
+    agent.policy_net.eval()
+    
     episode_rewards = []
     episode_lengths = []
     q_values = []
@@ -33,7 +36,7 @@ def evaluate_agent(env, agent, num_episodes=10, render=False, quiet=False):
                 env.render()
                 time.sleep(0.02)
                 
-            # Get Q-values and select action with small epsilon
+            # Get Q-values and select action (already handles device movement)
             q_vals = agent.get_q_values(state)
             action = agent.select_action(state, evaluate=True)
             episode_q_vals.append(np.max(q_vals))
@@ -52,6 +55,9 @@ def evaluate_agent(env, agent, num_episodes=10, render=False, quiet=False):
         episode_rewards.append(episode_reward)
         episode_lengths.append(episode_length)
         q_values.append(np.mean(episode_q_vals))
+    
+    # Return agent to training mode if needed
+    agent.policy_net.train()
     
     mean_reward = np.mean(episode_rewards)
     mean_length = np.mean(episode_lengths)

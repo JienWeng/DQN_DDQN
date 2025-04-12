@@ -95,19 +95,18 @@ def main():
     compare_parser.add_argument('--quiet', action='store_true',
                                 help='Reduce output to minimum')
     
-    # Parse arguments
+    # Parse arguments first
     args = parser.parse_args()
+    
+    # Set CUDA settings before anything else
+    if args.command and hasattr(args, 'no_cuda') and args.no_cuda:
+        os.environ['CUDA_VISIBLE_DEVICES'] = ''  # Disable CUDA entirely
+        print("CUDA has been disabled by command line argument.")
     
     # Create necessary directories
     os.makedirs('models/saved', exist_ok=True)
     os.makedirs('results', exist_ok=True)
     os.makedirs('results/metrics', exist_ok=True)
-    
-    # Set CUDA settings if specified
-    if args.command and hasattr(args, 'no_cuda') and args.no_cuda:
-        import torch
-        torch.cuda.is_available = lambda: False
-        print("CUDA has been disabled by command line argument.")
     
     # Execute command
     if args.command == 'train':

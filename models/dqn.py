@@ -79,21 +79,26 @@ class DQNAgent:
                 learning_rate=0.00025,
                 verbose=True):
         
-        # Check if CUDA is available but only print if verbose is enabled
+        # Initialize device first
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.verbose = verbose
         
         if self.verbose:
             print(f"Using device: {self.device}")
-            # Only print detailed GPU info once during initialization, not every call
             if self.device.type == 'cuda':
-                print(f"GPU: {torch.cuda.get_device_name(0)}")
+                props = torch.cuda.get_device_properties(self.device)
+                print(f"GPU: {props.name} ({props.total_memory / 1024**2:.0f}MB)")
         
+        # Create networks after device is initialized
         self.policy_net = DQNNetwork(input_shape, n_actions).to(self.device)
         self.target_net = DQNNetwork(input_shape, n_actions).to(self.device)
+        
+        # Move target network to same device and copy weights
+        self.target_net.to(self.device)
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         
+        # Create optimizer after model is on correct device
         self.optimizer = torch.optim.Adam(self.policy_net.parameters(), lr=learning_rate)
         self.memory = ReplayBuffer(buffer_size)
         
@@ -186,37 +191,36 @@ class DQNAgent:
     def get_q_values(self, state):
         """
         Get Q-values for a given state
-        Handles different state formats (numpy arrays, lists, tensors)
         """
         with torch.no_grad():
             try:
+                # Move everything to device first, then process
                 if self.is_image_input:
                     # Handle image input (4D tensor)
                     if isinstance(state, np.ndarray):
-                        state_tensor = torch.FloatTensor(state).unsqueeze(0).to(self.device)
+                        state_tensor = torch.FloatTensor(state).unsqueeze(0)
                     elif isinstance(state, list):
-                        state_tensor = torch.FloatTensor(np.array(state)).unsqueeze(0).to(self.device)
+                        state_tensor = torch.FloatTensor(np.array(state)).unsqueeze(0)
                     else:
-                        # Assume it's already a tensor
-                        state_tensor = state.unsqueeze(0).to(self.device) if state.dim() == 3 else state.to(self.device)
+                        state_tensor = state.unsqueeze(0) if state.dim() == 3 else state
                 else:
                     # Handle vector input
                     if isinstance(state, np.ndarray):
-                        state_tensor = torch.FloatTensor(state).to(self.device)
+                        state_tensor = torch.FloatTensor(state)
                     elif isinstance(state, list):
-                        state_tensor = torch.FloatTensor(state).to(self.device)
+                        state_tensor = torch.FloatTensor(state)
                     else:
-                        # Assume it's already a tensor
-                        state_tensor = state.to(self.device)
+                        state_tensor = state
                     
                     # Ensure correct shape
                     if state_tensor.dim() == 1:
                         state_tensor = state_tensor.unsqueeze(0)
                 
-                return self.policy_net(state_tensor).cpu().numpy()
+                # Move to device and get Q-values
+                state_tensor = state_tensor.to(self.device)
+                q_values = self.policy_net(state_tensor)
+                # Move back to CPU for numpy conversion
+                return q_values.cpu().numpy()
             except Exception as e:
                 print(f"Error processing state in get_q_values: {e}")
-                print(f"State type: {type(state)}")
-                print(f"State shape or length: {state.shape if hasattr(state, 'shape') else len(state)}")
-                # Return zeros as fallback
                 return np.zeros((1, self.n_actions))
