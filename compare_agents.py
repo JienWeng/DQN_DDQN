@@ -5,10 +5,11 @@ import matplotlib.ticker as ticker
 import os
 import pickle
 from train import train
+import scipy.stats as stats
 
 def compare_agents(args):
     """
-    Train and compare DQN and Double DQN on the same environment
+    Train and compare DQN and Double DQN with statistical analysis
     """
     # Check for GPU availability but be concise about it
     import torch
@@ -24,6 +25,12 @@ def compare_agents(args):
     # Initialize lists to store metrics for multiple seeds
     all_dqn_metrics = []
     all_ddqn_metrics = []
+    
+    # Store results for statistical analysis
+    dqn_final_rewards = []
+    ddqn_final_rewards = []
+    dqn_overestimations = []
+    ddqn_overestimations = []
     
     # If using multiple seeds, show warning for long computation time
     if args.seeds > 1 and device.type != 'cuda':
@@ -82,6 +89,12 @@ def compare_agents(args):
             pickle.dump(dqn_metrics, f)
         with open(f'results/metrics/ddqn_{args.env_name}_{current_seed}.pkl', 'wb') as f:
             pickle.dump(ddqn_metrics, f)
+        
+        # Store results from each run
+        dqn_final_rewards.append(np.mean(dqn_metrics.episode_rewards[-100:]))
+        ddqn_final_rewards.append(np.mean(ddqn_metrics.episode_rewards[-100:]))
+        dqn_overestimations.append(np.mean(dqn_metrics.overoptimism_values))
+        ddqn_overestimations.append(np.mean(ddqn_metrics.overoptimism_values))
     
     # Show total computation time
     total_time = time.time() - start_time
@@ -189,6 +202,35 @@ def compare_agents(args):
     if dqn_avg_overopt != 0:
         reduction_pct = (1 - ddqn_avg_overopt / dqn_avg_overopt) * 100
         print(f"  Reduction: {(dqn_avg_overopt - ddqn_avg_overopt):.4f} ({reduction_pct:.2f}%)")
+    
+    # Perform statistical analysis
+    print("\nStatistical Analysis:")
+    
+    # Performance comparison
+    t_stat, p_value = stats.ttest_ind(ddqn_final_rewards, dqn_final_rewards)
+    print("\nPerformance Analysis:")
+    print(f"DQN final reward: {np.mean(dqn_final_rewards):.2f} ± {np.std(dqn_final_rewards):.2f}")
+    print(f"DDQN final reward: {np.mean(ddqn_final_rewards):.2f} ± {np.std(ddqn_final_rewards):.2f}")
+    print(f"t-statistic: {t_stat:.4f}")
+    print(f"p-value: {p_value:.4f}")
+    
+    # Overestimation analysis
+    t_stat, p_value = stats.ttest_ind(ddqn_overestimations, dqn_overestimations)
+    print("\nOverestimation Analysis:")
+    print(f"DQN overestimation: {np.mean(dqn_overestimations):.4f} ± {np.std(dqn_overestimations):.4f}")
+    print(f"DDQN overestimation: {np.mean(ddqn_overestimations):.4f} ± {np.std(ddqn_overestimations):.4f}")
+    print(f"t-statistic: {t_stat:.4f}")
+    print(f"p-value: {p_value:.4f}")
+    
+    # Effect size calculation (Cohen's d)
+    d_performance = (np.mean(ddqn_final_rewards) - np.mean(dqn_final_rewards)) / \
+                   np.sqrt((np.var(ddqn_final_rewards) + np.var(dqn_final_rewards)) / 2)
+    d_overestimation = (np.mean(ddqn_overestimations) - np.mean(dqn_overestimations)) / \
+                       np.sqrt((np.var(ddqn_overestimations) + np.var(dqn_overestimations)) / 2)
+    
+    print("\nEffect Sizes (Cohen's d):")
+    print(f"Performance effect: {d_performance:.4f}")
+    print(f"Overestimation effect: {d_overestimation:.4f}")
     
     return all_dqn_metrics, all_ddqn_metrics
 

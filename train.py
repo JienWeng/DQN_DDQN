@@ -18,10 +18,10 @@ from utils.resource_manager import ResourceManager
 
 def train(args):
     """
-    Train DQN or Double DQN agent based on episodes
+    Train DQN or Double DQN agent based on episodes for empirical comparison
     """
     # Initialize logger and resource manager
-    logger = ExperimentLogger(f"{args.agent_type}_{args.env_name}")
+    logger = ExperimentLogger(f"{args.agent_type}_{args.env_name}_seed{args.seed}")
     resource_manager = ResourceManager(logger)
     logger.log_hyperparameters(args)
     
@@ -157,17 +157,10 @@ def train(args):
                          unit="episode", ncols=100, colour="green")
     
     for episode in episode_pbar:
-        # Check resources periodically
+        # Resource management without prompts
         if episode % 10 == 0:
             if not resource_manager.check_resources():
-                if not args.force:
-                    response = input("\nResource usage is high. Continue? [y/N]: ")
-                    if response.lower() != 'y':
-                        logger.logger.info("Training stopped due to resource constraints.")
-                        break
                 resource_manager.clear_memory()
-            
-            # Log resource usage
             resource_manager.log_resource_usage()
         
         # Reset for new episode
@@ -253,13 +246,10 @@ def train(args):
         }
         logger.log_metrics(metrics_dict, episode)
         
-        # Verify training progress
+        # Remove training progress verification prompt
         if not verify_training_progress(metrics, episode, logger, min_reward_threshold=-100):
-            if not args.force:
-                response = input("\nTraining may be stuck. Continue? [y/N]: ")
-                if response.lower() != 'y':
-                    logger.logger.info("Training stopped by user.")
-                    break
+            logger.logger.warning("Training progress degradation detected")
+            # Continue anyway to maintain consistent experimental conditions
         
         # Update outer progress bar
         avg_reward = np.mean(metrics.episode_rewards[-100:]) if len(metrics.episode_rewards) >= 100 else np.mean(metrics.episode_rewards)
