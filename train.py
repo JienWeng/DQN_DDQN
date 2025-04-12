@@ -12,11 +12,19 @@ from models.ddqn import DoubleDQNAgent
 from utils.atari_wrappers import make_atari_env
 from utils.metrics import MetricTracker
 from utils.evaluation import evaluate_agent, measure_overoptimism
+from utils.logging_utils import ExperimentLogger
+from utils.verification import verify_model_outputs, verify_training_progress
+from utils.resource_manager import ResourceManager
 
 def train(args):
     """
-    Train DQN or Double DQN agent based on episodes instead of frames
+    Train DQN or Double DQN agent based on episodes
     """
+    # Initialize logger and resource manager
+    logger = ExperimentLogger(f"{args.agent_type}_{args.env_name}")
+    resource_manager = ResourceManager(logger)
+    logger.log_hyperparameters(args)
+    
     # First check for CUDA availability but reduce verbosity
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Training on device: {device}")
@@ -82,7 +90,10 @@ def train(args):
     print(f"Action space: {env.action_space}")
     print(f"Using {'image-based' if is_atari else 'vector-based'} network architecture")
     
-    # Create agent with reduced verbosity in CUDA mode
+    # Optimize batch size based on available resources
+    args.batch_size = resource_manager.optimize_batch_size(args.batch_size)
+    
+    # Create agent with optimized parameters
     if args.agent_type.lower() == 'dqn':
         agent = DQNAgent(
             input_shape=input_shape,
@@ -112,6 +123,17 @@ def train(args):
             verbose=(args.verbose and not args.quiet)
         )
     
+    # Verify model
+    sample_state = env.reset()[0]
+    if is_atari:
+        sample_state = torch.FloatTensor(sample_state).unsqueeze(0).to(device)
+    else:
+        sample_state = torch.FloatTensor(sample_state).to(device)
+    
+    if not verify_model_outputs(agent.policy_net, sample_state, logger):
+        logger.logger.error("Model verification failed! Check model architecture.")
+        return None
+    
     # Initialize metrics tracker
     metrics = MetricTracker()
     
@@ -135,6 +157,19 @@ def train(args):
                          unit="episode", ncols=100, colour="green")
     
     for episode in episode_pbar:
+        # Check resources periodically
+        if episode % 10 == 0:
+            if not resource_manager.check_resources():
+                if not args.force:
+                    response = input("\nResource usage is high. Continue? [y/N]: ")
+                    if response.lower() != 'y':
+                        logger.logger.info("Training stopped due to resource constraints.")
+                        break
+                resource_manager.clear_memory()
+            
+            # Log resource usage
+            resource_manager.log_resource_usage()
+        
         # Reset for new episode
         if USING_GYMNASIUM:
             state, _ = env.reset()
@@ -209,6 +244,23 @@ def train(args):
         if episode_q_values:
             metrics.add_q_value(np.mean(episode_q_values))
         
+        # Log metrics
+        metrics_dict = {
+            'episode_reward': episode_reward,
+            'episode_length': episode_length,
+            'average_loss': np.mean(episode_loss) if episode_loss else 0,
+            'average_q_value': np.mean(episode_q_values) if episode_q_values else 0
+        }
+        logger.log_metrics(metrics_dict, episode)
+        
+        # Verify training progress
+        if not verify_training_progress(metrics, episode, min_reward_threshold=-100, logger):
+            if not args.force:
+                response = input("\nTraining may be stuck. Continue? [y/N]: ")
+                if response.lower() != 'y':
+                    logger.logger.info("Training stopped by user.")
+                    break
+        
         # Update outer progress bar
         avg_reward = np.mean(metrics.episode_rewards[-100:]) if len(metrics.episode_rewards) >= 100 else np.mean(metrics.episode_rewards)
         episode_pbar.set_postfix({
@@ -246,6 +298,9 @@ def train(args):
                 'total_frames': total_frames
             }, model_path)
             episode_pbar.write(f"Model saved to {model_path}")
+            
+            # Clear memory after evaluation
+            resource_manager.clear_memory()
     
     episode_pbar.close()
     
@@ -283,6 +338,19 @@ def train(args):
                        save_path=f"results/plots/{args.agent_type}_{args.env_name}_losses.png")
     metrics.plot_overoptimism(title=f"{args.agent_type} on {args.env_name} - Value Estimation",
                             save_path=f"results/plots/{args.agent_type}_{args.env_name}_overestimation.png")
+    
+    # Log final summary
+    summary_dict = {
+        'final_avg_reward': np.mean(metrics.episode_rewards[-100:]),
+        'best_reward': np.max(metrics.episode_rewards),
+        'average_episode_length': np.mean(metrics.episode_lengths),
+        'final_overoptimism': metrics.get_average_overoptimism()
+    }
+    logger.log_summary(summary_dict)
+    logger.save_metrics()
+    
+    # Final cleanup
+    resource_manager.clear_memory(force_cuda_empty=True)
     
     env.close()
     eval_env.close()
@@ -327,6 +395,8 @@ if __name__ == '__main__':
                         help='Reduce verbosity')
     parser.add_argument('--verbose', action='store_true', 
                         help='Increase verbosity')
+    parser.add_argument('--force', action='store_true', 
+                        help='Force training to continue despite warnings')
     
     args = parser.parse_args()
     
