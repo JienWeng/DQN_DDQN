@@ -19,6 +19,11 @@ pip install gym "gym[atari]"
 
 ## Usage
 
+### Check CUDA Setup
+```bash
+python check_cuda.py
+```
+
 ### Training a Single Agent
  
 ```bash
